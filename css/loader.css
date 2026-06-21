@@ -143,10 +143,60 @@
   font-size: clamp(56px, 10.5vw, 136px);
   font-weight: 300;
   color: var(--brown-dark);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1;
-  display: block;
+  display: inline-flex;
+  align-items: flex-end;
   will-change: opacity, transform;
+}
+
+.loader__letter {
+  display: inline-block;
+  transform:
+    translateY(var(--letter-y, 0))
+    rotate(var(--letter-rotate, 0deg))
+    skewX(var(--letter-skew, 0deg));
+  transform-origin: 50% 78%;
+}
+
+.loader__letter--l {
+  --letter-y: -0.01em;
+  --letter-rotate: -0.4deg;
+}
+
+.loader__letter--o {
+  --letter-y: 0.035em;
+  --letter-rotate: -1.6deg;
+  --letter-skew: 1deg;
+}
+
+.loader__letter--a {
+  --letter-y: 0.02em;
+  --letter-rotate: 2.2deg;
+  --letter-skew: -2deg;
+}
+
+.loader__letter--d {
+  --letter-y: -0.015em;
+  --letter-rotate: 2.8deg;
+  --letter-skew: -1deg;
+}
+
+.loader__letter--i {
+  --letter-y: -0.01em;
+  --letter-rotate: -1deg;
+}
+
+.loader__letter--n {
+  --letter-y: 0.015em;
+  --letter-rotate: 1.4deg;
+  --letter-skew: -1deg;
+}
+
+.loader__letter--g {
+  --letter-y: 0.055em;
+  --letter-rotate: -2.2deg;
+  --letter-skew: 1.2deg;
 }
 
 .loader__word-icon {
@@ -184,7 +234,7 @@
 }
 
 .loader__bird {
-  width: clamp(180px, 28vw, 320px);
+  width: clamp(72px, 9vw, 120px);
   color: #B8A898; /* currentColor propagates to injected SVG strokes */
 }
 
@@ -192,6 +242,18 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+.loader__bird path {
+  vector-effect: non-scaling-stroke;
+  transition:
+    stroke 0.28s var(--ease-out),
+    stroke-width 0.28s var(--ease-out);
+}
+
+.loader__bird path.is-active {
+  stroke: var(--brown-dark);
+  stroke-width: 3.4;
 }
 
 .loader__word-icon svg {

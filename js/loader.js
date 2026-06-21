@@ -31,8 +31,18 @@ const TIMING = {
   iconHold: 95,
   iconOut: 0.2,
   iconGap: 28,
+  wordSqueeze: 0.3,
+  wordRelease: 0.36,
   slotClose: 0.82,
   outroPause: 190,
+  outroSink: 0.62,
+};
+
+const BIRD_BAR_STYLE = {
+  idleStroke: '#B8A898',
+  activeStroke: '#1C1209',
+  idleWidth: 2.7,
+  activeWidth: 3.8,
 };
 
 export async function initLoader() {
@@ -50,15 +60,57 @@ export async function initLoader() {
   ).filter(Boolean);
 
   const logoBox   = loader.querySelector('.loader__logo-box');
+  const word      = loader.querySelector('.loader__word');
   const wordParts = loader.querySelectorAll('.loader__word-part');
   const iconSlot  = loader.querySelector('.loader__word-icon');
   const bird      = loader.querySelector('.loader__bird');
+  const birdBars  = bird ? [...bird.querySelectorAll('path')] : [];
+  let wordSqueezeX = 0;
+  const setWordSqueeze = (amount, duration) => new Promise(res => {
+    const [loadPart, ingPart] = wordParts;
+    if (!loadPart || !ingPart) {
+      res();
+      return;
+    }
+
+    gsap.timeline({ onComplete: res })
+      .to(loadPart, {
+        x: wordSqueezeX * amount,
+        duration,
+        ease: 'sine.inOut',
+        overwrite: 'auto',
+      }, 0)
+      .to(ingPart, {
+        x: -wordSqueezeX * amount,
+        duration,
+        ease: 'sine.inOut',
+        overwrite: 'auto',
+      }, 0);
+  });
+  const setActiveBirdBars = count => {
+    birdBars.forEach((bar, index) => {
+      const isActive = index >= birdBars.length - count;
+      bar.classList.toggle('is-active', isActive);
+      bar.setAttribute('stroke', isActive ? BIRD_BAR_STYLE.activeStroke : BIRD_BAR_STYLE.idleStroke);
+      bar.setAttribute('stroke-width', isActive ? BIRD_BAR_STYLE.activeWidth : BIRD_BAR_STYLE.idleWidth);
+      gsap.to(bar, {
+        stroke: isActive ? BIRD_BAR_STYLE.activeStroke : BIRD_BAR_STYLE.idleStroke,
+        strokeWidth: isActive ? BIRD_BAR_STYLE.activeWidth : BIRD_BAR_STYLE.idleWidth,
+        opacity: isActive ? 1 : 0.45,
+        duration: 0.24,
+        ease: 'sine.out',
+        overwrite: true,
+      });
+    });
+  };
 
   gsap.set([logoBox, ...wordParts, bird], { opacity: 0 });
-  gsap.set([...wordParts], { y: 18 });
+  gsap.set(word, { y: 0 });
+  gsap.set([...wordParts], { x: 0, y: 18 });
   gsap.set(logoBox, { y: -10 });
   gsap.set(bird,    { y: 14 });
   gsap.set(iconSlot, { opacity: 1, width: 0 });
+  setActiveBirdBars(0);
 
   // Phase 1: logo + text + bird appear
   await new Promise(res => {
@@ -68,30 +120,53 @@ export async function initLoader() {
       .to(bird,      { opacity: 1, y: 0, duration: 0.9,  ease: 'sine.out' }, '-=0.55');
   });
 
-  const iconSize = `${iconSlot.getBoundingClientRect().height}px`;
+  const iconHeight = iconSlot.getBoundingClientRect().height;
+  const iconSize = `${iconHeight}px`;
+  wordSqueezeX = Math.min(9, Math.max(4, iconHeight * 0.055));
 
   // Phase 2: open the word, cycle icons, then close back to "loading"
   await wait(TIMING.slotPause);
   await tween(iconSlot, { width: iconSize, duration: TIMING.slotOpen, ease: 'sine.inOut' });
   await wait(TIMING.blankHold);
 
-  for (const svg of svgs) {
+  for (const [index, svg] of svgs.entries()) {
     const currentIcon = svg.cloneNode(true);
     iconSlot.replaceChildren(currentIcon);
+    setActiveBirdBars(index + 1);
 
-    await fromTo(
+    const iconIn = fromTo(
       currentIcon,
       { opacity: 0, y: 10, scale: 0.96 },
       { opacity: 1, y: 0,  scale: 1, duration: TIMING.iconIn, ease: 'sine.out' }
     );
+
+    if (index === 0) {
+      await iconIn;
+    } else {
+      await Promise.all([
+        iconIn,
+        setWordSqueeze(0, TIMING.wordRelease),
+      ]);
+    }
+
     await wait(TIMING.iconHold);
-    await tween(currentIcon, {
+    const iconOut = tween(currentIcon, {
       opacity: 0,
       y: -10,
       scale: 0.98,
       duration: TIMING.iconOut,
       ease: 'sine.inOut',
     });
+
+    if (index === svgs.length - 1) {
+      await iconOut;
+    } else {
+      await Promise.all([
+        iconOut,
+        setWordSqueeze(1, TIMING.wordSqueeze),
+      ]);
+    }
+
     await wait(TIMING.iconGap);
   }
 
@@ -99,8 +174,18 @@ export async function initLoader() {
   await wait(TIMING.blankHold);
   await tween(iconSlot, { width: 0, duration: TIMING.slotClose, ease: 'sine.inOut' });
 
-  // Phase 3: brief pause on "loading", then fade the whole loader out
+  // Phase 3: brief pause on "loading", sink the loader marks, then fade out
   await wait(TIMING.outroPause);
+  await new Promise(res => {
+    gsap.timeline({ onComplete: res })
+      .to([word, bird].filter(Boolean), {
+        opacity: 0,
+        y: 46,
+        duration: TIMING.outroSink,
+        ease: 'sine.inOut',
+        stagger: 0.06,
+      });
+  });
   await tween(loader, { opacity: 0, duration: 0.9, ease: 'sine.inOut' });
 
   loader.style.display = 'none';
