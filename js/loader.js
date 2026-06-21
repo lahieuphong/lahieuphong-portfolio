@@ -26,11 +26,11 @@ const wait   = ms               => new Promise(res => setTimeout(res, ms));
 const TIMING = {
   slotPause: 180,
   slotOpen: 0.82,
-  blankHold: 190,
-  iconIn: 0.42,
-  iconHold: 170,
-  iconOut: 0.36,
-  iconGap: 70,
+  blankHold: 130,
+  iconIn: 0.24,
+  iconHold: 95,
+  iconOut: 0.2,
+  iconGap: 28,
   slotClose: 0.82,
   outroPause: 190,
 };

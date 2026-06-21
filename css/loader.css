@@ -25,14 +25,102 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 28px;
-  background: var(--brown-dark);
-  color: var(--cream);
+  max-width: calc(100vw - 40px);
+  --loader-logo-brown: #4A3028;
+  --loader-logo-height: clamp(36px, 3.7vw, 58px);
+  --loader-logo-mark-width: clamp(54px, 5.2vw, 80px);
+  padding: 0;
+  background: transparent;
+  color: var(--loader-logo-brown);
   font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 400;
-  letter-spacing: 0.22em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.loader__logo-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--loader-logo-mark-width);
+  height: var(--loader-logo-height);
+  background: var(--loader-logo-brown);
+  color: var(--cream-light);
+}
+
+.loader__logo-computer {
+  position: absolute;
+  inset: 16% 18% 18%;
+}
+
+.loader__logo-screen {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: block;
+  width: 100%;
+  height: 66%;
+  border: 1px solid currentColor;
+  transform: translateX(-50%);
+}
+
+.loader__logo-monogram {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: currentColor;
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.05vw, 15px);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  transform: translate(-50%, -50%);
+}
+
+.loader__logo-stand {
+  position: absolute;
+  left: 50%;
+  top: 66%;
+  display: block;
+  width: 1px;
+  height: 15%;
+  background: currentColor;
+  transform: translateX(-50%);
+  transform-origin: top center;
+}
+
+.loader__logo-base,
+.loader__logo-base::before {
+  position: absolute;
+  left: 50%;
+  display: block;
+  height: 1px;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+
+.loader__logo-base {
+  bottom: 5%;
+  width: 92%;
+}
+
+.loader__logo-base::before {
+  content: "";
+  bottom: 6px;
+  width: 58%;
+}
+
+.loader__logo-wordmark {
+  display: inline-flex;
+  align-items: center;
+  height: var(--loader-logo-height);
+  padding: 0 clamp(10px, 0.85vw, 14px);
+  border: 2px solid var(--loader-logo-brown);
+  color: var(--loader-logo-brown);
+  background: #EDE3D0;
+  font-size: clamp(14px, 1.25vw, 20px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
+  word-spacing: 0.04em;
 }
 
 /* "load [icon] ing" — center */
