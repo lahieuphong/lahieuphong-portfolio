@@ -1,0 +1,93 @@
+/* ═══════════════════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════════════════ */
+#contact {
+  background: var(--cream);
+  text-align: center;
+}
+
+.contact__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.contact__title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-4xl), 7vw, var(--text-6xl));
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-md);
+}
+
+.contact__title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.contact__sub {
+  font-size: var(--text-lg);
+  font-weight: 300;
+  color: var(--brown-mid);
+  line-height: 1.7;
+  margin-bottom: var(--space-xl);
+}
+
+.contact__email {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+  font-weight: 300;
+  color: var(--brown-dark);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-xl);
+  position: relative;
+  transition: color var(--dur-mid) var(--ease-out);
+}
+
+.contact__email::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.contact__email:hover { color: var(--gold); }
+.contact__email:hover::after { width: 100%; }
+
+.contact__socials {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.social-link {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown-mid);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.social-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width var(--dur-mid) var(--ease-out);
+}
+
+.social-link:hover { color: var(--gold); }
+.social-link:hover::after { width: 100%; }

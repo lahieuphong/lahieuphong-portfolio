@@ -1,0 +1,87 @@
+/* ═══════════════════════════════════════════════════════════
+   BASE — Design tokens, reset, global elements
+═══════════════════════════════════════════════════════════ */
+:root {
+  /* Colors */
+  --cream:        #F7EBDB;
+  --cream-light:  #FAF5EE;
+  --sand:         #E5D6C7;
+  --sand-dark:    #D4C4B0;
+  --brown-dark:   #1C1209;
+  --brown-mid:    #4A3728;
+  --brown-light:  #7A6251;
+  --gold:         #C4862F;
+  --gold-light:   #D4A853;
+  --gold-pale:    #EDD89A;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Font sizes */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  2.75rem;
+  --text-5xl:  3.75rem;
+  --text-6xl:  5rem;
+  --text-7xl:  7rem;
+  --text-8xl:  10rem;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  7rem;
+  --space-2xl: 12rem;
+
+  /* Layout */
+  --container: 1280px;
+  --nav-h:     80px;
+
+  /* Easing & duration */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast:    0.3s;
+  --dur-mid:     0.6s;
+  --dur-slow:    1s;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--brown-dark);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+}
+
+ul { list-style: none; }

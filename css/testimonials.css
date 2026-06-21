@@ -1,0 +1,43 @@
+/* ═══════════════════════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════════════════════ */
+#testimonials {
+  background: var(--sand);
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  padding: var(--space-lg);
+  background: var(--cream-light);
+  border-radius: 4px;
+  border-left: 2px solid var(--gold);
+}
+
+.testimonial__quote {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--brown-dark);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial__name {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--brown-dark);
+  margin-bottom: 2px;
+}
+
+.testimonial__role {
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  color: var(--brown-light);
+}

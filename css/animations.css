@@ -1,0 +1,42 @@
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL ANIMATIONS
+═══════════════════════════════════════════════════════════ */
+
+/* Initial hidden state — JS adds .is-visible via ScrollTrigger */
+.reveal-text,
+.reveal-line,
+.reveal-scale,
+.reveal-up {
+  opacity: 0;
+}
+
+.reveal-text.is-visible {
+  animation: revealFade 0.9s var(--ease-out) var(--delay, 0s) both;
+}
+
+.reveal-line.is-visible {
+  animation: revealUp 1s var(--ease-out) var(--delay, 0s) both;
+}
+
+.reveal-scale.is-visible {
+  animation: revealScale 1s var(--ease-out) var(--delay, 0s) both;
+}
+
+.reveal-up.is-visible {
+  animation: revealUp 0.8s var(--ease-out) var(--delay, 0s) both;
+}
+
+@keyframes revealFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes revealScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
