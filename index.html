@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — [TÊN]</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       LOADER
+  ═══════════════════════════════════════ -->
+  <div id="loader">
+    <div class="loader__bar"></div>
+    <span class="loader__label">[TÊN]</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       CUSTOM CURSOR
+  ═══════════════════════════════════════ -->
+  <div id="cursor">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav id="nav">
+    <a href="#hero" class="nav__logo">[TÊN]</a>
+    <ul class="nav__links">
+      <li><a href="#about" class="nav__link">About</a></li>
+      <li><a href="#works" class="nav__link">Works</a></li>
+      <li><a href="#skills" class="nav__link">Skills</a></li>
+      <li><a href="#contact" class="nav__link">Contact</a></li>
+    </ul>
+    <button class="nav__menu-btn" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu">
+    <ul class="mobile-menu__links">
+      <li><a href="#about" class="mobile-menu__link">About</a></li>
+      <li><a href="#works" class="mobile-menu__link">Works</a></li>
+      <li><a href="#skills" class="mobile-menu__link">Skills</a></li>
+      <li><a href="#contact" class="mobile-menu__link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero__bg-text" aria-hidden="true">[ROLE]</div>
+
+    <div class="hero__content">
+      <p class="hero__eyebrow reveal-text">[CITY / COUNTRY]</p>
+
+      <h1 class="hero__title">
+        <span class="hero__title-line reveal-line">
+          <em>[ADJECTIVE]</em>
+        </span>
+        <span class="hero__title-line reveal-line">
+          [ROLE / TITLE]
+        </span>
+      </h1>
+
+      <p class="hero__subtitle reveal-text">
+        [MÔ TẢ NGẮN VỀ BẢN THÂN — 1 CÂU]
+      </p>
+
+      <div class="hero__cta reveal-text">
+        <a href="#works" class="btn btn--primary">View Works</a>
+        <a href="#contact" class="btn btn--ghost">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <div class="hero__scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+
+    <div class="hero__media">
+      <!-- PLACEHOLDER: ảnh hoặc video hero -->
+      <div class="hero__media-placeholder"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MARQUEE (optional strip)
+  ═══════════════════════════════════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>[TAG1]</span><span>·</span>
+      <span>[TAG2]</span><span>·</span>
+      <span>[TAG3]</span><span>·</span>
+      <span>[TAG4]</span><span>·</span>
+      <span>[TAG5]</span><span>·</span>
+      <span>[TAG1]</span><span>·</span>
+      <span>[TAG2]</span><span>·</span>
+      <span>[TAG3]</span><span>·</span>
+      <span>[TAG4]</span><span>·</span>
+      <span>[TAG5]</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       ABOUT
+  ═══════════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+
+      <div class="section-label reveal-text">About</div>
+
+      <div class="about__grid">
+        <div class="about__text-col">
+          <p class="about__lead reveal-line">
+            [CÂU MỞ ĐẦU ẤN TƯỢNG VỀ BẢN THÂN — 1-2 CÂU DÀI]
+          </p>
+          <p class="about__body reveal-text">
+            [ĐOẠN MÔ TẢ CHI TIẾT HƠN — BACKGROUND, PASSION, APPROACH]
+          </p>
+          <a href="#" class="btn btn--text reveal-text">Download CV →</a>
+        </div>
+
+        <div class="about__side-col">
+          <div class="about__image reveal-scale">
+            <!-- PLACEHOLDER: ảnh cá nhân -->
+            <div class="about__image-placeholder"></div>
+          </div>
+
+          <div class="about__stats reveal-text">
+            <div class="stat">
+              <span class="stat__num">[N]+</span>
+              <span class="stat__label">Years Experience</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">[N]+</span>
+              <span class="stat__label">Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">[N]+</span>
+              <span class="stat__label">Clients</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       WORKS
+  ═══════════════════════════════════════ -->
+  <section id="works">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label reveal-text">Works</div>
+        <h2 class="section-title reveal-line">Selected Projects</h2>
+      </div>
+
+      <!-- Filter tabs (optional) -->
+      <div class="works__filters reveal-text">
+        <button class="filter-btn filter-btn--active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="[CAT1]">[CATEGORY 1]</button>
+        <button class="filter-btn" data-filter="[CAT2]">[CATEGORY 2]</button>
+        <button class="filter-btn" data-filter="[CAT3]">[CATEGORY 3]</button>
+      </div>
+
+      <!-- Projects grid -->
+      <div class="works__grid">
+
+        <!-- Project card 1 — LARGE -->
+        <article class="project-card project-card--large" data-category="[CAT]">
+          <a href="#" class="project-card__link">
+            <div class="project-card__media">
+              <div class="project-card__media-placeholder"></div>
+              <div class="project-card__overlay">
+                <span class="project-card__view">View Project ↗</span>
+              </div>
+            </div>
+            <div class="project-card__info">
+              <span class="project-card__num">01</span>
+              <div>
+                <h3 class="project-card__title">[PROJECT TITLE]</h3>
+                <p class="project-card__tags">[Tag] · [Tag] · [Year]</p>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Project card 2 -->
+        <article class="project-card" data-category="[CAT]">
+          <a href="#" class="project-card__link">
+            <div class="project-card__media">
+              <div class="project-card__media-placeholder"></div>
+              <div class="project-card__overlay">
+                <span class="project-card__view">View Project ↗</span>
+              </div>
+            </div>
+            <div class="project-card__info">
+              <span class="project-card__num">02</span>
+              <div>
+                <h3 class="project-card__title">[PROJECT TITLE]</h3>
+                <p class="project-card__tags">[Tag] · [Tag] · [Year]</p>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Project card 3 -->
+        <article class="project-card" data-category="[CAT]">
+          <a href="#" class="project-card__link">
+            <div class="project-card__media">
+              <div class="project-card__media-placeholder"></div>
+              <div class="project-card__overlay">
+                <span class="project-card__view">View Project ↗</span>
+              </div>
+            </div>
+            <div class="project-card__info">
+              <span class="project-card__num">03</span>
+              <div>
+                <h3 class="project-card__title">[PROJECT TITLE]</h3>
+                <p class="project-card__tags">[Tag] · [Tag] · [Year]</p>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Project card 4 -->
+        <article class="project-card" data-category="[CAT]">
+          <a href="#" class="project-card__link">
+            <div class="project-card__media">
+              <div class="project-card__media-placeholder"></div>
+              <div class="project-card__overlay">
+                <span class="project-card__view">View Project ↗</span>
+              </div>
+            </div>
+            <div class="project-card__info">
+              <span class="project-card__num">04</span>
+              <div>
+                <h3 class="project-card__title">[PROJECT TITLE]</h3>
+                <p class="project-card__tags">[Tag] · [Tag] · [Year]</p>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+
+      <div class="works__more reveal-text">
+        <a href="#" class="btn btn--ghost">See All Works</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SKILLS / SERVICES
+  ═══════════════════════════════════════ -->
+  <section id="skills">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label reveal-text">Skills</div>
+        <h2 class="section-title reveal-line">What I Do</h2>
+      </div>
+
+      <div class="skills__grid">
+
+        <div class="skill-item reveal-up">
+          <span class="skill-item__num">01</span>
+          <h3 class="skill-item__title">[SKILL / SERVICE 1]</h3>
+          <p class="skill-item__desc">[MÔ TẢ NGẮN]</p>
+          <div class="skill-item__tags">
+            <span>[Tool]</span><span>[Tool]</span><span>[Tool]</span>
+          </div>
+        </div>
+
+        <div class="skill-item reveal-up" style="--delay: 0.1s">
+          <span class="skill-item__num">02</span>
+          <h3 class="skill-item__title">[SKILL / SERVICE 2]</h3>
+          <p class="skill-item__desc">[MÔ TẢ NGẮN]</p>
+          <div class="skill-item__tags">
+            <span>[Tool]</span><span>[Tool]</span><span>[Tool]</span>
+          </div>
+        </div>
+
+        <div class="skill-item reveal-up" style="--delay: 0.2s">
+          <span class="skill-item__num">03</span>
+          <h3 class="skill-item__title">[SKILL / SERVICE 3]</h3>
+          <p class="skill-item__desc">[MÔ TẢ NGẮN]</p>
+          <div class="skill-item__tags">
+            <span>[Tool]</span><span>[Tool]</span><span>[Tool]</span>
+          </div>
+        </div>
+
+        <div class="skill-item reveal-up" style="--delay: 0.3s">
+          <span class="skill-item__num">04</span>
+          <h3 class="skill-item__title">[SKILL / SERVICE 4]</h3>
+          <p class="skill-item__desc">[MÔ TẢ NGẮN]</p>
+          <div class="skill-item__tags">
+            <span>[Tool]</span><span>[Tool]</span><span>[Tool]</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TESTIMONIALS (optional)
+  ═══════════════════════════════════════ -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-label reveal-text">Testimonials</div>
+
+      <div class="testimonials__grid">
+
+        <blockquote class="testimonial reveal-up">
+          <p class="testimonial__quote">"[LỜI NHẬN XÉT CỦA KHÁCH HÀNG / ĐỐI TÁC]"</p>
+          <footer class="testimonial__author">
+            <span class="testimonial__name">[TÊN]</span>
+            <span class="testimonial__role">[CHỨC VỤ, CÔNG TY]</span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="testimonial reveal-up" style="--delay: 0.15s">
+          <p class="testimonial__quote">"[LỜI NHẬN XÉT]"</p>
+          <footer class="testimonial__author">
+            <span class="testimonial__name">[TÊN]</span>
+            <span class="testimonial__role">[CHỨC VỤ, CÔNG TY]</span>
+          </footer>
+        </blockquote>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════ -->
+  <section id="contact">
+    <div class="container">
+
+      <div class="contact__inner">
+        <div class="section-label reveal-text">Contact</div>
+
+        <h2 class="contact__title reveal-line">
+          Let's work<br /><em>together</em>
+        </h2>
+
+        <p class="contact__sub reveal-text">
+          [CÂU MỜI HỢP TÁC NGẮN]
+        </p>
+
+        <a href="mailto:[EMAIL]" class="contact__email reveal-text">
+          [EMAIL]
+        </a>
+
+        <div class="contact__socials reveal-text">
+          <a href="#" class="social-link">LinkedIn ↗</a>
+          <a href="#" class="social-link">GitHub ↗</a>
+          <a href="#" class="social-link">Behance ↗</a>
+          <a href="#" class="social-link">Dribbble ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">[TÊN]</span>
+        <span class="footer__copy">© 2025 [TÊN]. All rights reserved.</span>
+        <a href="#hero" class="footer__back-top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
