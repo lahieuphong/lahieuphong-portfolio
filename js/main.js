@@ -45,22 +45,59 @@ function initLoader() {
   const loader = document.getElementById('loader');
   if (!loader) return;
 
+  document.body.style.overflow = 'hidden';
+
+  const logoBox   = loader.querySelector('.loader__logo-box');
+  const wordParts = loader.querySelectorAll('.loader__word-part');
+  const wordIcon  = loader.querySelector('.loader__word-icon');
+  const bird      = loader.querySelector('.loader__bird');
+
+  // Set initial hidden states
+  gsap.set([logoBox, wordParts, wordIcon, bird], { opacity: 0 });
+  gsap.set([wordParts, wordIcon], { y: 30 });
+  gsap.set(logoBox, { y: -16 });
+  gsap.set(bird,    { y: 20 });
+
   const tl = gsap.timeline({
-    delay: 0.2,
+    delay: 0.1,
     onComplete: () => {
-      loader.classList.add('loader--hidden');
-      document.body.style.overflow = '';
-      // Trigger hero entrance after loader
-      heroEntrance();
+      // Short hold, then fade out loader
+      gsap.to(loader, {
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power2.inOut',
+        delay: 0.4,
+        onComplete: () => {
+          loader.classList.add('loader--hidden');
+          loader.style.display = 'none';
+          document.body.style.overflow = '';
+          heroEntrance();
+        }
+      });
     }
   });
 
-  document.body.style.overflow = 'hidden';
-
-  tl.to(loader, {
-    duration: 1.8,
-    ease: 'none',
-  });
+  tl.to(logoBox, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+    })
+    .to([wordParts, wordIcon], {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      stagger: 0.06,
+      ease: 'power3.out',
+    }, '-=0.2')
+    .to(bird, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+    }, '-=0.5')
+    // Hold for 1.2s then trigger onComplete
+    .to({}, { duration: 1.2 });
 }
 
 /* ═══════════════════════════════════════════════════════════

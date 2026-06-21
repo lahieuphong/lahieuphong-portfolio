@@ -96,55 +96,92 @@ ul { list-style: none; }
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--brown-dark);
+  background: #EDE3D0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-md);
-}
-
-.loader__label {
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  font-weight: 300;
-  color: var(--cream);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: loaderFadeIn 0.6s var(--ease-out) 0.2s forwards;
-}
-
-.loader__bar {
-  width: 200px;
-  height: 1px;
-  background: var(--brown-light);
-  position: relative;
+  justify-content: space-between;
+  padding: 48px 40px 40px;
   overflow: hidden;
 }
 
-.loader__bar::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: loaderBar 1.4s var(--ease-in-out) 0.4s forwards;
+/* — Logo box — top center */
+.loader__top {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-@keyframes loaderFadeIn {
-  to { opacity: 1; }
+.loader__logo-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 28px;
+  background: var(--brown-dark);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
-@keyframes loaderBar {
-  to { transform: scaleX(1); }
+/* — "load [icon] ing" — center */
+.loader__center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.loader__word {
+  display: flex;
+  align-items: center;
+  gap: 0.12em;
+  line-height: 1;
+}
+
+.loader__word-part {
+  font-family: var(--font-body);
+  font-size: clamp(56px, 10.5vw, 136px);
+  font-weight: 300;
+  color: var(--brown-dark);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: block;
+}
+
+.loader__word-icon {
+  display: block;
+  width:  clamp(56px, 10.5vw, 136px);
+  height: clamp(56px, 10.5vw, 136px);
+  color: var(--brown-dark);
+  flex-shrink: 0;
+}
+
+.loader__word-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* — Bird decoration — bottom center */
+.loader__bottom {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.loader__bird {
+  width: clamp(180px, 28vw, 320px);
+  height: auto;
+  color: #B8A898;
+}
+
+/* — Hidden state after load — */
 #loader.loader--hidden {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s var(--ease-out);
+  transition: opacity 0.7s var(--ease-out);
 }
 
 /* ═══════════════════════════════════════════════════════════
