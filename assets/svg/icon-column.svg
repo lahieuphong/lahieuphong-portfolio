@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="currentColor">
+  <rect x="4" y="8" width="92" height="12" rx="1"/>
+  <path d="M14 20 L86 20 L80 36 L20 36Z"/>
+  <rect x="21" y="38" width="58" height="5"/>
+  <path fill-rule="evenodd" d="
+    M23 45 L77 45 L77 82 L23 82Z
+    M30 45 L32 45 L32 82 L30 82Z
+    M38 45 L40 45 L40 82 L38 82Z
+    M46 45 L48 45 L48 82 L46 82Z
+    M54 45 L56 45 L56 82 L54 82Z
+    M62 45 L64 45 L64 82 L62 82Z
+    M70 45 L72 45 L72 82 L70 82Z
+  "/>
+  <rect x="14" y="84" width="72" height="9" rx="1"/>
+</svg>

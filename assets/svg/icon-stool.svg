@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="currentColor">
+  <path fill-rule="evenodd" d="
+    M6 28 C6 18 26 12 50 12 C74 12 94 18 94 28 C94 38 74 44 50 44 C26 44 6 38 6 28Z
+    M18 28 C18 22 33 18 50 18 C67 18 82 22 82 28 C82 34 67 38 50 38 C33 38 18 34 18 28Z
+  "/>
+  <path d="M24 44 L14 90 L22 90 L30 44Z"/>
+  <rect x="45" y="44" width="10" height="46" rx="3"/>
+  <path d="M76 44 L70 90 L78 90 L86 44Z"/>
+</svg>

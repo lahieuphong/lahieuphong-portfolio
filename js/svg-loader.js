@@ -11,7 +11,7 @@
 
 const svgCache = new Map();
 
-async function fetchSVG(src) {
+export async function fetchSVG(src) {
   if (svgCache.has(src)) return svgCache.get(src);
 
   const res  = await fetch(src);

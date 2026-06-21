@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="currentColor">
+  <path fill-rule="evenodd" d="
+    M5 14 L5 88 L48 84 L48 14Z
+    M52 14 L52 84 L95 88 L95 14Z
+    M12 30 L44 27 L44 33 L12 36Z
+    M12 42 L44 39 L44 45 L12 48Z
+    M12 54 L44 51 L44 57 L12 60Z
+    M12 66 L44 63 L44 69 L12 72Z
+    M56 27 L88 30 L88 36 L56 33Z
+    M56 39 L88 42 L88 48 L56 45Z
+    M56 51 L88 54 L88 60 L56 57Z
+    M56 63 L88 66 L88 72 L56 69Z
+  "/>
+</svg>
