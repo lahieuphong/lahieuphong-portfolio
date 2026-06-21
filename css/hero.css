@@ -9,6 +9,18 @@
   padding: 0;
   padding-top: var(--nav-h);
   overflow: hidden;
+  /* Atmospheric gradient — warm haze top half, cream lower half */
+  background: linear-gradient(
+    to bottom,
+    #D9B898 0%,
+    #E2C5A5 12%,
+    #ECCFB2 28%,
+    #F0DBBF 45%,
+    #F4E4CE 62%,
+    #F7EBDB 78%,
+    #F7EBDB 100%
+  );
+  isolation: isolate;
 }
 
 .hero__bg-text {
@@ -31,7 +43,7 @@
 
 .hero__content {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   padding: var(--space-xl) var(--space-lg);
   max-width: 900px;
 }
@@ -91,7 +103,7 @@
   font-size: var(--text-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  z-index: 1;
+  z-index: 10;
 }
 
 .hero__scroll-line {
@@ -108,9 +120,211 @@
   100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
 
+/* Three.js cloud canvas — above blobs(0), below content */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  display: block;
+  opacity: 0.82;
+}
+
 .hero__media {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
+}
+
+/* ── Layered cloudscape, inspired by the UNESCO hero haze ── */
+.hero__cloudscape {
+  position: absolute;
+  inset: -16vh -12vw;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero__cloud-layer {
+  position: absolute;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+}
+
+.hero__cloud-layer--back {
+  top: -12%;
+  left: -8%;
+  width: 128%;
+  height: 70%;
+  opacity: 0.88;
+  filter: blur(24px);
+  background:
+    radial-gradient(ellipse at 10% 42%, rgba(255, 251, 246, 0.88) 0 18%, rgba(255, 251, 246, 0.44) 33%, transparent 58%),
+    radial-gradient(ellipse at 28% 32%, rgba(255, 254, 251, 0.94) 0 20%, rgba(255, 254, 251, 0.46) 35%, transparent 60%),
+    radial-gradient(ellipse at 47% 38%, rgba(236, 241, 240, 0.72) 0 19%, rgba(236, 241, 240, 0.34) 36%, transparent 64%),
+    radial-gradient(ellipse at 66% 30%, rgba(255, 250, 245, 0.88) 0 22%, rgba(255, 250, 245, 0.42) 39%, transparent 66%),
+    radial-gradient(ellipse at 88% 36%, rgba(218, 218, 216, 0.58) 0 20%, rgba(218, 218, 216, 0.28) 40%, transparent 68%);
+  animation: cloud-drift-back 46s ease-in-out infinite;
+}
+
+.hero__cloud-layer--mid {
+  top: 4%;
+  left: -16%;
+  width: 138%;
+  height: 76%;
+  opacity: 0.96;
+  filter: blur(30px);
+  background:
+    radial-gradient(ellipse at 8% 58%, rgba(255, 252, 248, 0.86) 0 20%, rgba(255, 252, 248, 0.46) 38%, transparent 68%),
+    radial-gradient(ellipse at 24% 50%, rgba(244, 232, 220, 0.82) 0 19%, rgba(244, 232, 220, 0.34) 37%, transparent 64%),
+    radial-gradient(ellipse at 42% 46%, rgba(255, 255, 254, 0.92) 0 21%, rgba(255, 255, 254, 0.48) 39%, transparent 70%),
+    radial-gradient(ellipse at 62% 48%, rgba(239, 243, 242, 0.74) 0 18%, rgba(239, 243, 242, 0.34) 36%, transparent 66%),
+    radial-gradient(ellipse at 82% 52%, rgba(255, 249, 242, 0.84) 0 22%, rgba(255, 249, 242, 0.38) 42%, transparent 72%);
+  animation: cloud-drift-mid 38s ease-in-out infinite;
+}
+
+.hero__cloud-layer--front {
+  right: -12%;
+  bottom: -18%;
+  width: 132%;
+  height: 70%;
+  opacity: 0.92;
+  filter: blur(22px);
+  background:
+    radial-gradient(ellipse at 16% 32%, rgba(255, 255, 253, 0.82) 0 18%, rgba(255, 255, 253, 0.42) 37%, transparent 66%),
+    radial-gradient(ellipse at 34% 42%, rgba(247, 238, 229, 0.88) 0 22%, rgba(247, 238, 229, 0.44) 42%, transparent 72%),
+    radial-gradient(ellipse at 54% 34%, rgba(255, 255, 255, 0.9) 0 20%, rgba(255, 255, 255, 0.48) 38%, transparent 68%),
+    radial-gradient(ellipse at 74% 40%, rgba(229, 232, 232, 0.62) 0 18%, rgba(229, 232, 232, 0.3) 36%, transparent 64%),
+    radial-gradient(ellipse at 94% 36%, rgba(255, 248, 241, 0.76) 0 19%, rgba(255, 248, 241, 0.34) 37%, transparent 66%);
+  animation: cloud-drift-front 34s ease-in-out infinite;
+}
+
+.hero__cloud-layer--veil {
+  inset: 6% -10% 0;
+  opacity: 0.64;
+  filter: blur(42px);
+  background:
+    linear-gradient(90deg, rgba(255, 247, 239, 0.54), rgba(255, 255, 255, 0.24) 40%, rgba(231, 232, 231, 0.28) 72%, rgba(255, 246, 238, 0.42)),
+    radial-gradient(ellipse at 44% 50%, rgba(255, 255, 255, 0.72) 0 18%, transparent 58%);
+  animation: cloud-veil-breathe 18s ease-in-out infinite;
+}
+
+@keyframes cloud-drift-back {
+  0%, 100% { transform: translate3d(-2%, 0, 0) scale(1); }
+  50%      { transform: translate3d(3%, 2%, 0) scale(1.04); }
+}
+
+@keyframes cloud-drift-mid {
+  0%, 100% { transform: translate3d(2%, -1%, 0) scale(1.02); }
+  50%      { transform: translate3d(-3%, 2%, 0) scale(1.06); }
+}
+
+@keyframes cloud-drift-front {
+  0%, 100% { transform: translate3d(-1%, 2%, 0) scale(1.01); }
+  50%      { transform: translate3d(4%, -1%, 0) scale(1.05); }
+}
+
+@keyframes cloud-veil-breathe {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 0.72; transform: scale(1.035); }
+}
+
+/* ── Animated blob background ─────────────────────────── */
+.hero__blobs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero__blob-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Blob 1 — large, top-right, warm cream */
+.hero__blob--1 {
+  width: clamp(380px, 52vw, 680px);
+  height: clamp(300px, 40vw, 540px);
+  top: -8%;
+  right: -2%;
+  background: radial-gradient(ellipse at center,
+    rgba(247, 235, 219, 0.95) 0%,
+    transparent 70%);
+  filter: blur(65px);
+  animation: blob-drift 32s ease-in-out infinite;
+}
+
+/* Blob 2 — medium, center-right, soft sand */
+.hero__blob--2 {
+  width: clamp(280px, 38vw, 500px);
+  height: clamp(240px, 32vw, 440px);
+  top: 22%;
+  right: 8%;
+  background: radial-gradient(ellipse at center,
+    rgba(229, 214, 199, 0.72) 0%,
+    transparent 66%);
+  filter: blur(85px);
+  animation: blob-drift 40s ease-in-out infinite reverse;
+  animation-delay: -14s;
+}
+
+/* Blob 3 — small, bottom-center, faint gold */
+.hero__blob--3 {
+  width: clamp(180px, 24vw, 340px);
+  height: clamp(180px, 22vw, 320px);
+  bottom: 12%;
+  left: 28%;
+  background: radial-gradient(ellipse at center,
+    rgba(196, 134, 47, 0.15) 0%,
+    transparent 62%);
+  filter: blur(70px);
+  animation: blob-drift 24s ease-in-out infinite;
+  animation-delay: -7s;
+}
+
+/* Blob 4 — medium-large, far right, deep sand */
+.hero__blob--4 {
+  width: clamp(300px, 42vw, 580px);
+  height: clamp(260px, 36vw, 500px);
+  top: 42%;
+  right: -8%;
+  background: radial-gradient(ellipse at center,
+    rgba(212, 196, 176, 0.52) 0%,
+    transparent 66%);
+  filter: blur(95px);
+  animation: blob-drift 44s ease-in-out infinite reverse;
+  animation-delay: -22s;
+}
+
+/* Blob 5 — small accent, top-left, pale gold */
+.hero__blob--5 {
+  width: clamp(140px, 18vw, 260px);
+  height: clamp(140px, 16vw, 230px);
+  top: 12%;
+  left: -4%;
+  background: radial-gradient(ellipse at center,
+    rgba(237, 216, 154, 0.24) 0%,
+    transparent 60%);
+  filter: blur(55px);
+  animation: blob-drift 28s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+@keyframes blob-drift {
+  0%,  100% { transform: translate(0,   0)   scale(1);    }
+  25%        { transform: translate(3%,  5%)  scale(1.06); }
+  50%        { transform: translate(-4%, 2%)  scale(0.97); }
+  75%        { transform: translate(5%,  -3%) scale(1.03); }
 }

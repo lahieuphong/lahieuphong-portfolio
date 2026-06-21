@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
+  <!-- Three.js (particle cloud background) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
@@ -103,6 +106,37 @@
        HERO
   ═══════════════════════════════════════ -->
   <section id="hero">
+
+    <!-- Three.js WebGL cloud canvas — rendered first (behind all) -->
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+    <!-- Layered cloudscape — full-screen cloud cover behind hero content -->
+    <div class="hero__cloudscape" aria-hidden="true">
+      <div class="hero__cloud-layer hero__cloud-layer--back"></div>
+      <div class="hero__cloud-layer hero__cloud-layer--mid"></div>
+      <div class="hero__cloud-layer hero__cloud-layer--front"></div>
+      <div class="hero__cloud-layer hero__cloud-layer--veil"></div>
+    </div>
+
+    <!-- CSS blob background — warm color atmosphere layer -->
+    <div class="hero__blobs" aria-hidden="true">
+      <div class="hero__blob-wrap" data-parallax-depth="0.8">
+        <div class="hero__blob hero__blob--1"></div>
+      </div>
+      <div class="hero__blob-wrap" data-parallax-depth="1.5">
+        <div class="hero__blob hero__blob--2"></div>
+      </div>
+      <div class="hero__blob-wrap" data-parallax-depth="2.3">
+        <div class="hero__blob hero__blob--3"></div>
+      </div>
+      <div class="hero__blob-wrap" data-parallax-depth="1.0">
+        <div class="hero__blob hero__blob--4"></div>
+      </div>
+      <div class="hero__blob-wrap" data-parallax-depth="2.8">
+        <div class="hero__blob hero__blob--5"></div>
+      </div>
+    </div>
+
     <div class="hero__bg-text" aria-hidden="true">[ROLE]</div>
 
     <div class="hero__content">

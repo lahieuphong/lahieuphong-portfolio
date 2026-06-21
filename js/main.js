@@ -10,6 +10,7 @@ import { initScrollReveals, initHeroParallax } from './animations.js';
 import { initProjectCards, initWorksFilter }   from './works.js';
 import { initMarquee }                         from './marquee.js';
 import { initSmoothScroll }                    from './utils.js';
+import { initThreeClouds }                     from './three-clouds.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   if (typeof gsap === 'undefined') {
@@ -18,6 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   gsap.registerPlugin(ScrollTrigger);
+
+  initThreeClouds();
 
   // initLoader is async: it fetches SVG files before animating
   await initLoader();
