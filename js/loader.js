@@ -24,13 +24,15 @@ const fromTo = (el, from, to)   => new Promise(res => gsap.fromTo(el, from, { ..
 const wait   = ms               => new Promise(res => setTimeout(res, ms));
 
 const TIMING = {
+  logoCenterHold: 120,
+  logoRise: 0.72,
   slotPause: 180,
   slotOpen: 0.82,
   blankHold: 130,
-  iconIn: 0.24,
-  iconHold: 95,
-  iconOut: 0.2,
-  iconGap: 28,
+  iconIn: 0.18,
+  iconHold: 70,
+  iconOut: 0.16,
+  iconGap: 18,
   wordSqueeze: 0.3,
   wordRelease: 0.36,
   slotClose: 0.82,
@@ -60,6 +62,7 @@ export async function initLoader() {
   ).filter(Boolean);
 
   const logoBox   = loader.querySelector('.loader__logo-box');
+  const logoTop   = loader.querySelector('.loader__top');
   const word      = loader.querySelector('.loader__word');
   const wordParts = loader.querySelectorAll('.loader__word-part');
   const iconSlot  = loader.querySelector('.loader__word-icon');
@@ -104,20 +107,48 @@ export async function initLoader() {
     });
   };
 
+  const getLogoCenterOffset = () => {
+    if (!logoBox) return 0;
+    const rect = logoBox.getBoundingClientRect();
+    return window.innerHeight / 2 - (rect.top + rect.height / 2);
+  };
+
   gsap.set([logoBox, ...wordParts, bird], { opacity: 0 });
+  gsap.set(logoTop, { y: getLogoCenterOffset() });
   gsap.set(word, { y: 0 });
   gsap.set([...wordParts], { x: 0, y: 18 });
-  gsap.set(logoBox, { y: -10 });
+  gsap.set(logoBox, { y: 0 });
   gsap.set(bird,    { y: 14 });
   gsap.set(iconSlot, { opacity: 1, width: 0 });
   setActiveBirdBars(0);
 
-  // Phase 1: logo + text + bird appear
+  // Phase 1: show the logo at center, move it to the top, then reveal the loader marks
   await new Promise(res => {
-    gsap.timeline({ onComplete: res, delay: 0.1 })
-      .to(logoBox,   { opacity: 1, y: 0, duration: 0.8, ease: 'sine.out' })
-      .to(wordParts, { opacity: 1, y: 0, duration: 0.95, stagger: 0.06, ease: 'sine.out' }, '-=0.35')
-      .to(bird,      { opacity: 1, y: 0, duration: 0.9,  ease: 'sine.out' }, '-=0.55');
+    gsap.timeline({ onComplete: res, delay: 0.08 })
+      .to(logoBox, {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'sine.out',
+      })
+      .to({}, { duration: TIMING.logoCenterHold / 1000 })
+      .to(logoTop, {
+        y: 0,
+        duration: TIMING.logoRise,
+        ease: 'sine.inOut',
+      })
+      .to(wordParts, {
+        opacity: 1,
+        y: 0,
+        duration: 0.95,
+        stagger: 0.06,
+        ease: 'sine.out',
+      }, '-=0.16')
+      .to(bird, {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: 'sine.out',
+      }, '-=0.62');
   });
 
   const iconHeight = iconSlot.getBoundingClientRect().height;
