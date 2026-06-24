@@ -7,16 +7,16 @@
 import { fetchSVG, injectSVGs } from './svg-loader.js';
 
 const ICONS = [
-  'assets/svg/icon-plant.svg',
-  'assets/svg/icon-mushroom.svg',
-  'assets/svg/icon-book.svg',
-  'assets/svg/icon-stool.svg',
-  'assets/svg/icon-column.svg',
-  'assets/svg/icon-amphora.svg',
+  'assets/svg/icon-face.svg',
   'assets/svg/icon-drum.svg',
+  'assets/svg/icon-amphora.svg',
+  'assets/svg/icon-column.svg',
+  'assets/svg/icon-book.svg',
+  'assets/svg/icon-plant.svg',
+  'assets/svg/icon-stool.svg',
   'assets/svg/icon-helmet.svg',
   'assets/svg/icon-frame.svg',
-  'assets/svg/icon-face.svg',
+  'assets/svg/icon-mushroom.svg',
 ];
 
 const tween  = (el, vars)       => new Promise(res => gsap.to(el, { ...vars, onComplete: res }));
