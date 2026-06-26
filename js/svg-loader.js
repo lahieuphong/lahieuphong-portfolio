@@ -10,12 +10,27 @@
 ═══════════════════════════════════════════════════════════ */
 
 const svgCache = new Map();
+const svgModules = import.meta.glob('../assets/svg/*.svg', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+
+const svgRegistry = new Map(
+  Object.entries(svgModules).map(([path, raw]) => {
+    const fileName = path.split('/').pop();
+    return [`assets/svg/${fileName}`, raw];
+  })
+);
 
 export async function fetchSVG(src) {
   if (svgCache.has(src)) return svgCache.get(src);
 
-  const res  = await fetch(src);
-  const text = await res.text();
+  let text = svgRegistry.get(src);
+  if (!text) {
+    const res = await fetch(src);
+    text = await res.text();
+  }
   const doc  = new DOMParser().parseFromString(text, 'image/svg+xml');
   const svg  = doc.querySelector('svg');
 

@@ -11,13 +11,10 @@ import { initProjectCards, initWorksFilter }   from './works.js';
 import { initMarquee }                         from './marquee.js';
 import { initSmoothScroll }                    from './utils.js';
 import { initThreeClouds }                     from './three-clouds.js';
+import { gsap }                                from 'gsap';
+import { ScrollTrigger }                       from 'gsap/ScrollTrigger';
 
-document.addEventListener('DOMContentLoaded', async () => {
-  if (typeof gsap === 'undefined') {
-    console.warn('GSAP failed to load — check CDN connection.');
-    return;
-  }
-
+export async function initPortfolio() {
   gsap.registerPlugin(ScrollTrigger);
 
   initThreeClouds();
@@ -33,4 +30,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   initWorksFilter();
   initMarquee();
   initSmoothScroll();
-});
+}

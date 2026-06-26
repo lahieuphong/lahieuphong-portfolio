@@ -2,6 +2,8 @@
    CURSOR — Custom cursor with lag ring effect
 ═══════════════════════════════════════════════════════════ */
 
+import { gsap } from 'gsap';
+
 export function initCursor() {
   const cursor = document.getElementById('cursor');
   if (!cursor) return;

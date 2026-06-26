@@ -5,6 +5,7 @@
 ═══════════════════════════════════════════════════════════ */
 
 import { fetchSVG, injectSVGs } from './svg-loader.js';
+import { gsap } from 'gsap';
 
 const ICONS = [
   'assets/svg/icon-face.svg',

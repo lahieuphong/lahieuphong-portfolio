@@ -2,6 +2,8 @@
    WORKS — Project cards stagger + category filter
 ═══════════════════════════════════════════════════════════ */
 
+import { gsap } from 'gsap';
+
 export function initProjectCards() {
   const cards = document.querySelectorAll('.project-card');
   if (!cards.length) return;

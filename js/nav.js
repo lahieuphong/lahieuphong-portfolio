@@ -2,6 +2,9 @@
    NAV — Scroll behavior + mobile menu toggle
 ═══════════════════════════════════════════════════════════ */
 
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 export function initNav() {
   const nav        = document.getElementById('nav');
   const menuBtn    = nav?.querySelector('.nav__menu-btn');

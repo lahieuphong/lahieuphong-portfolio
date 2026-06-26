@@ -2,6 +2,9 @@
    ANIMATIONS — Scroll reveals + hero parallax
 ═══════════════════════════════════════════════════════════ */
 
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 export function initScrollReveals() {
   const REVEAL_SELECTOR = '.reveal-text, .reveal-line, .reveal-scale, .reveal-up';
 

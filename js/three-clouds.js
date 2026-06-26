@@ -5,6 +5,8 @@
    respond to mouse parallax via camera offset.
 ═══════════════════════════════════════════════════════════ */
 
+import * as THREE from 'three';
+
 // ── Texture factory ─────────────────────────────────────────
 function makePuff(ctx, x, y, r, alpha) {
   const g = ctx.createRadialGradient(x, y, 0, x, y, r);
@@ -89,7 +91,7 @@ const CLOUD_DEFS = [
 
 export function initThreeClouds() {
   const heroCanvas = document.getElementById('hero-canvas');
-  if (!heroCanvas || typeof THREE === 'undefined') return;
+  if (!heroCanvas) return;
 
   const hero = document.getElementById('hero');
   const W = heroCanvas.offsetWidth  || window.innerWidth;
