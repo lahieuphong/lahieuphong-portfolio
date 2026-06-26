@@ -54,22 +54,33 @@ export async function initLoader() {
 
   document.body.style.overflow = 'hidden';
 
-  // Inject bird SVG (only static declarative SVG remaining)
-  await injectSVGs(loader);
-
-  // Pre-fetch all icons in parallel
-  const svgs = (
-    await Promise.all(ICONS.map(src => fetchSVG(src).catch(() => null)))
-  ).filter(Boolean);
-
   const logoBox   = loader.querySelector('.loader__logo-box');
   const logoTop   = loader.querySelector('.loader__top');
   const word      = loader.querySelector('.loader__word');
   const wordParts = loader.querySelectorAll('.loader__word-part');
   const iconSlot  = loader.querySelector('.loader__word-icon');
   const bird      = loader.querySelector('.loader__bird');
-  const birdBars  = bird ? [...bird.querySelectorAll('path')] : [];
+  let birdBars    = [];
   let wordSqueezeX = 0;
+
+  const getLogoCenterOffset = () => {
+    if (!logoBox || !logoTop) return 0;
+
+    const previousTransform = logoTop.style.transform;
+    logoTop.style.transform = 'none';
+    const rect = logoBox.getBoundingClientRect();
+    logoTop.style.transform = previousTransform;
+
+    return window.innerHeight / 2 - (rect.top + rect.height / 2);
+  };
+
+  gsap.set(logoTop, { y: getLogoCenterOffset() });
+  gsap.set(logoBox, { opacity: 1, y: 0 });
+  gsap.set(word, { y: 0 });
+  gsap.set([...wordParts], { opacity: 0, x: 0, y: 18 });
+  gsap.set(bird, { opacity: 0, y: 14 });
+  gsap.set(iconSlot, { opacity: 1, width: 0 });
+
   const setWordSqueeze = (amount, duration) => new Promise(res => {
     const [loadPart, ingPart] = wordParts;
     if (!loadPart || !ingPart) {
@@ -108,29 +119,18 @@ export async function initLoader() {
     });
   };
 
-  const getLogoCenterOffset = () => {
-    if (!logoBox) return 0;
-    const rect = logoBox.getBoundingClientRect();
-    return window.innerHeight / 2 - (rect.top + rect.height / 2);
-  };
-
-  gsap.set([logoBox, ...wordParts, bird], { opacity: 0 });
-  gsap.set(logoTop, { y: getLogoCenterOffset() });
-  gsap.set(word, { y: 0 });
-  gsap.set([...wordParts], { x: 0, y: 18 });
-  gsap.set(logoBox, { y: 0 });
-  gsap.set(bird,    { y: 14 });
-  gsap.set(iconSlot, { opacity: 1, width: 0 });
-  setActiveBirdBars(0);
+  const birdReady = injectSVGs(loader)
+    .then(() => {
+      birdBars = bird ? [...bird.querySelectorAll('path')] : [];
+      setActiveBirdBars(0);
+    })
+    .catch(err => {
+      console.warn('[loader] Failed to prepare bird SVG', err);
+    });
 
   // Phase 1: show the logo at center, move it to the top, then reveal the loader marks
   await new Promise(res => {
     gsap.timeline({ onComplete: res, delay: 0.08 })
-      .to(logoBox, {
-        opacity: 1,
-        duration: 0.5,
-        ease: 'sine.out',
-      })
       .to({}, { duration: TIMING.logoCenterHold / 1000 })
       .to(logoTop, {
         y: 0,
@@ -151,6 +151,13 @@ export async function initLoader() {
         ease: 'sine.out',
       }, '-=0.62');
   });
+
+  await birdReady;
+
+  // Pre-fetch icons after the visible loader state is already moving.
+  const svgs = (
+    await Promise.all(ICONS.map(src => fetchSVG(src).catch(() => null)))
+  ).filter(Boolean);
 
   const iconHeight = iconSlot.getBoundingClientRect().height;
   const iconSize = `${iconHeight}px`;

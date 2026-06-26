@@ -2,6 +2,11 @@
    LOADER
 ═══════════════════════════════════════════════════════════ */
 #loader {
+  --loader-padding-top: 48px;
+  --loader-logo-height: clamp(36px, 3.7vw, 58px);
+  --loader-logo-half-height: clamp(18px, 1.85vw, 29px);
+  --loader-logo-mark-width: clamp(54px, 5.2vw, 80px);
+
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -10,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 48px 40px 40px;
+  padding: var(--loader-padding-top) 40px 40px;
   overflow: hidden;
 }
 
@@ -19,6 +24,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  transform: translateY(calc(50dvh - var(--loader-padding-top) - var(--loader-logo-half-height)));
   will-change: transform;
 }
 
@@ -28,8 +34,6 @@
   justify-content: center;
   max-width: calc(100vw - 40px);
   --loader-logo-brown: #4A3028;
-  --loader-logo-height: clamp(36px, 3.7vw, 58px);
-  --loader-logo-mark-width: clamp(54px, 5.2vw, 80px);
   padding: 0;
   background: transparent;
   color: var(--loader-logo-brown);
@@ -148,6 +152,8 @@
   line-height: 1;
   display: inline-flex;
   align-items: flex-end;
+  opacity: 0;
+  transform: translateY(18px);
   will-change: opacity, transform;
 }
 
@@ -237,6 +243,9 @@
 .loader__bird {
   width: clamp(72px, 9vw, 120px);
   color: #B8A898; /* currentColor propagates to injected SVG strokes */
+  opacity: 0;
+  transform: translateY(14px);
+  will-change: opacity, transform;
 }
 
 .loader__bird svg {
