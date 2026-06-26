@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { initPortfolio } from '../js/main.js';
+
 const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#works', label: 'Works' },
@@ -162,31 +165,56 @@ function Hero() {
         </div>
       </div>
 
-      <div className="hero__bg-text" aria-hidden="true">[ROLE]</div>
-
-      <div className="hero__content">
-        <p className="hero__eyebrow reveal-text">[CITY / COUNTRY]</p>
-        <h1 className="hero__title">
-          <span className="hero__title-line reveal-line">
-            <em>[ADJECTIVE]</em>
+      <div className="hero__museum-logo" aria-label="UNESCO">
+        <span className="hero__museum-mark" aria-hidden="true">
+          <span className="hero__museum-roof" />
+          <span className="hero__museum-pillars">
+            <span />
+            <span />
+            <span />
+            <span />
           </span>
-          <span className="hero__title-line reveal-line">[ROLE / TITLE]</span>
+          <span className="hero__museum-base" />
+        </span>
+        <span className="hero__museum-word">unesco</span>
+      </div>
+
+      <div className="hero__content hero__content--museum">
+        <h1 className="hero__title hero__title--museum">
+          <span className="hero__title-line">UNESCO Virtual Museum</span>
+          <span className="hero__title-line hero__title-line--accent">
+            of Stolen Cultural Objects
+          </span>
         </h1>
-        <p className="hero__subtitle reveal-text">
-          [MÔ TẢ NGẮN VỀ BẢN THÂN — 1 CÂU]
+        <p className="hero__subtitle hero__subtitle--museum">
+          Explore a unique museum - a digital space to learn, connect with and share<br />
+          the stories of stolen cultural heritage.
         </p>
-        <div className="hero__cta reveal-text">
-          <a href="#works" className="btn btn--primary">View Works</a>
-          <a href="#contact" className="btn btn--ghost">Get in Touch</a>
+        <div className="hero__cta hero__cta--museum">
+          <a href="#about" className="btn hero__visit-btn">
+            <span>Visit now</span>
+            <span className="hero__visit-arrow" aria-hidden="true">›</span>
+          </a>
         </div>
       </div>
 
-      <div className="hero__scroll-hint" aria-hidden="true">
-        <div className="hero__scroll-line" />
-        <span>Scroll</span>
+      <div className="hero__vr-note" aria-hidden="true">
+        <span className="hero__vr-icon" />
+        <span>This website is also available<br />with a VR Headset.</span>
       </div>
 
-      <div className="hero__media">
+      <div className="hero__language" aria-hidden="true">
+        <span>English</span>
+        <span className="hero__language-chevron">⌄</span>
+      </div>
+
+      <div className="hero__equalizer" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
+
+      <div className="hero__media" aria-hidden="true">
         <div className="hero__media-placeholder" />
       </div>
     </section>
@@ -406,11 +434,14 @@ function Footer() {
 }
 
 export default function App() {
+  useEffect(() => {
+    initPortfolio();
+  }, []);
+
   return (
     <>
       <Loader />
       <Cursor />
-      <Navigation />
       <Hero />
       <Marquee />
       <About />

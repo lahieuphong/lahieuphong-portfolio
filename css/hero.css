@@ -4,21 +4,17 @@
 #hero {
   position: relative;
   min-height: 100dvh;
-  display: flex;
-  align-items: flex-end;
+  display: block;
   padding: 0;
-  padding-top: var(--nav-h);
   overflow: hidden;
   /* Atmospheric gradient — warm haze top half, cream lower half */
   background: linear-gradient(
-    to bottom,
-    #D9B898 0%,
-    #E2C5A5 12%,
-    #ECCFB2 28%,
-    #F0DBBF 45%,
-    #F4E4CE 62%,
-    #F7EBDB 78%,
-    #F7EBDB 100%
+    115deg,
+    #F6EBE2 0%,
+    #F7EFE9 24%,
+    #F2E2D8 52%,
+    #F8EFE8 74%,
+    #EED7CC 100%
   );
   isolation: isolate;
 }
@@ -48,6 +44,18 @@
   max-width: 900px;
 }
 
+.hero__content--museum {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(108px, 10.7vh, 142px);
+  width: min(1260px, calc(100vw - 48px));
+  max-width: none;
+  padding: 0;
+  text-align: center;
+  transform: translateX(-50%);
+  z-index: 12;
+}
+
 .hero__eyebrow {
   font-size: var(--text-xs);
   font-weight: 500;
@@ -66,6 +74,16 @@
   margin-bottom: var(--space-md);
 }
 
+.hero__title--museum {
+  margin: 0;
+  color: #3E241D;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(3.45rem, 5.25vw, 7rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 0.84;
+}
+
 .hero__title em {
   font-style: italic;
   color: var(--gold);
@@ -74,6 +92,12 @@
 .hero__title-line {
   display: block;
   overflow: hidden;
+}
+
+.hero__title-line--accent {
+  color: #D18A76;
+  font-size: 0.88em;
+  font-weight: 400;
 }
 
 .hero__subtitle {
@@ -85,11 +109,221 @@
   line-height: 1.7;
 }
 
+.hero__subtitle--museum {
+  max-width: none;
+  margin: clamp(22px, 2vh, 30px) auto 0;
+  color: #4E332B;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(1.08rem, 1.28vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.22;
+}
+
 .hero__cta {
   display: flex;
   gap: var(--space-sm);
   flex-wrap: wrap;
 }
+
+.hero__cta--museum {
+  justify-content: center;
+  margin-top: clamp(22px, 3.1vh, 36px);
+}
+
+.hero__visit-btn {
+  width: clamp(310px, 23vw, 448px);
+  min-height: clamp(72px, 6.7vw, 102px);
+  justify-content: space-between;
+  padding: 0 clamp(12px, 0.8vw, 16px) 0 clamp(32px, 2vw, 42px);
+  border-radius: 999px;
+  background: #4C2D24;
+  color: #FFF5E5;
+  font-size: clamp(1.45rem, 1.55vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  box-shadow: 0 20px 54px rgba(76, 45, 36, 0.16);
+}
+
+.hero__visit-btn:hover {
+  background: #3E241D;
+  color: #FFF8EA;
+  transform: translateY(-2px);
+}
+
+.hero__visit-arrow {
+  display: grid;
+  place-items: center;
+  width: clamp(58px, 4.55vw, 82px);
+  height: clamp(58px, 4.55vw, 82px);
+  border-radius: 50%;
+  background: #FFF2D8;
+  color: #4C2D24;
+  font-size: clamp(2.3rem, 2.45vw, 3.1rem);
+  font-weight: 500;
+  line-height: 1;
+  transform: translateY(-0.04em);
+}
+
+.hero__museum-logo {
+  position: absolute;
+  top: clamp(30px, 3.5vh, 44px);
+  left: 50%;
+  z-index: 14;
+  display: inline-flex;
+  align-items: stretch;
+  height: clamp(54px, 4.9vw, 78px);
+  border: 2px solid #4C2D24;
+  color: #4C2D24;
+  background: rgba(255, 248, 239, 0.55);
+  transform: translateX(-50%);
+}
+
+.hero__museum-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(84px, 5.8vw, 112px);
+  height: 100%;
+  background: #4C2D24;
+  color: #FFF5E5;
+}
+
+.hero__museum-roof {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  width: 46%;
+  height: 22%;
+  border: 2px solid currentColor;
+  border-bottom: 0;
+  transform: translateX(-50%) skewX(-18deg);
+  transform-origin: center bottom;
+}
+
+.hero__museum-pillars {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  display: flex;
+  gap: 5px;
+  transform: translateX(-50%);
+}
+
+.hero__museum-pillars span {
+  width: 3px;
+  height: clamp(14px, 1.35vw, 22px);
+  background: currentColor;
+}
+
+.hero__museum-base {
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  width: 52%;
+  height: 2px;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+
+.hero__museum-word {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 clamp(18px, 1.7vw, 30px);
+  color: #4C2D24;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(2.4rem, 3.05vw, 4.25rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 0.9;
+}
+
+.hero__vr-note,
+.hero__language,
+.hero__equalizer {
+  position: absolute;
+  z-index: 13;
+  color: #4C2D24;
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+.hero__vr-note {
+  left: clamp(28px, 2.9vw, 54px);
+  bottom: clamp(26px, 3.2vh, 42px);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: clamp(1rem, 1.12vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.hero__vr-icon {
+  position: relative;
+  width: 44px;
+  height: 32px;
+  border: 3px solid currentColor;
+  border-radius: 16px 16px 12px 12px;
+}
+
+.hero__vr-icon::before,
+.hero__vr-icon::after {
+  content: "";
+  position: absolute;
+  border: 3px solid currentColor;
+}
+
+.hero__vr-icon::before {
+  left: -6px;
+  top: 10px;
+  width: 16px;
+  height: 14px;
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+.hero__vr-icon::after {
+  right: 8px;
+  top: 9px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.hero__language {
+  right: clamp(132px, 8.4vw, 168px);
+  bottom: clamp(30px, 3.3vh, 42px);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: clamp(0.92rem, 0.88vw, 1.1rem);
+  font-weight: 800;
+}
+
+.hero__language-chevron {
+  font-size: 1.7em;
+  line-height: 0.6;
+}
+
+.hero__equalizer {
+  right: clamp(31px, 2.9vw, 56px);
+  bottom: clamp(31px, 3.3vh, 44px);
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 38px;
+}
+
+.hero__equalizer span {
+  display: block;
+  width: 5px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.hero__equalizer span:nth-child(1) { height: 26px; }
+.hero__equalizer span:nth-child(2) { height: 36px; }
+.hero__equalizer span:nth-child(3) { height: 30px; }
 
 .hero__scroll-hint {
   position: absolute;
@@ -120,14 +354,16 @@
   100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
 
-/* Three.js cloud canvas — above blobs(0), below content */
+/* Three.js museum cloud scene — above haze, below content */
 #hero-canvas {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
   pointer-events: none;
   display: block;
-  opacity: 0.82;
+  opacity: 1;
 }
 
 .hero__media {
@@ -135,6 +371,10 @@
   inset: 0;
   z-index: 0;
   overflow: hidden;
+}
+
+.hero__media-placeholder {
+  opacity: 0;
 }
 
 /* ── Layered cloudscape, inspired by the UNESCO hero haze ── */
@@ -190,7 +430,7 @@
   bottom: -18%;
   width: 132%;
   height: 70%;
-  opacity: 0.92;
+  opacity: 0.98;
   filter: blur(22px);
   background:
     radial-gradient(ellipse at 16% 32%, rgba(255, 255, 253, 0.82) 0 18%, rgba(255, 255, 253, 0.42) 37%, transparent 66%),
@@ -203,8 +443,8 @@
 
 .hero__cloud-layer--veil {
   inset: 6% -10% 0;
-  opacity: 0.64;
-  filter: blur(42px);
+  opacity: 0.78;
+  filter: blur(48px);
   background:
     linear-gradient(90deg, rgba(255, 247, 239, 0.54), rgba(255, 255, 255, 0.24) 40%, rgba(231, 232, 231, 0.28) 72%, rgba(255, 246, 238, 0.42)),
     radial-gradient(ellipse at 44% 50%, rgba(255, 255, 255, 0.72) 0 18%, transparent 58%);

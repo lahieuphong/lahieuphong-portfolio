@@ -235,10 +235,14 @@ export async function initLoader() {
 function heroEntrance() {
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-  tl.from('.hero__eyebrow',     { y: 20,     opacity: 0, duration: 0.8 })
+  tl.from('.hero__museum-logo', { y: -18,    opacity: 0, duration: 0.8 })
     .from('.hero__title-line',  { y: '100%', opacity: 0, duration: 1.1, stagger: 0.12 }, '-=0.4')
     .from('.hero__subtitle',    { y: 20,     opacity: 0, duration: 0.8 }, '-=0.5')
     .from('.hero__cta .btn',    { y: 20,     opacity: 0, duration: 0.7, stagger: 0.1  }, '-=0.4')
-    .from('.hero__scroll-hint', { opacity: 0, duration: 0.6 }, '-=0.2')
-    .from('.hero__bg-text',     { opacity: 0, duration: 1.2 }, '-=1.2');
+    .from(['.hero__vr-note', '.hero__language', '.hero__equalizer'], {
+      y: 12,
+      opacity: 0,
+      duration: 0.65,
+      stagger: 0.08,
+    }, '-=0.35');
 }

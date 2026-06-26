@@ -17,10 +17,14 @@ import { ScrollTrigger }                       from 'gsap/ScrollTrigger';
 export async function initPortfolio() {
   gsap.registerPlugin(ScrollTrigger);
 
-  initThreeClouds();
-
   // initLoader is async: it fetches SVG files before animating
   await initLoader();
+
+  try {
+    initThreeClouds();
+  } catch (err) {
+    console.warn('[main] Failed to initialize Three.js hero scene', err);
+  }
 
   initCursor();
   initNav();
